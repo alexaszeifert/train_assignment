@@ -16,10 +16,10 @@ A programnak meg kell adnia azt az akciótervet, aminek a hatására az összes 
 
 ### Akcióterv elemek:
 
-*Adott órában kocsi töltése áruval (csak nem csatlakoztatott kocsit szabad tölteni)
-*Adott órában kocsi csatlakoztatása vonathoz (nem lehet ugyanazon órában tölteni és csatlakoztatni
-*Adott órában kocsi leválasztása kocsiról (egy órában egy kocsi leválasztása és csatlakoztatása átcsatolást jelent egy másik vonatra, szabad lecsatolni és pakolni ugyanazon órában)
-*Adott órában kocsi kipakolása (csak nem csatlakoztatott kocsit szabad kipakolni)
+* Adott órában kocsi töltése áruval (csak nem csatlakoztatott kocsit szabad tölteni)
+* Adott órában kocsi csatlakoztatása vonathoz (nem lehet ugyanazon órában tölteni és csatlakoztatni
+* Adott órában kocsi leválasztása kocsiról (egy órában egy kocsi leválasztása és csatlakoztatása átcsatolást jelent egy másik vonatra, szabad lecsatolni és pakolni ugyanazon órában)
+* Adott órában kocsi kipakolása (csak nem csatlakoztatott kocsit szabad kipakolni)
 
 ### Example:
 

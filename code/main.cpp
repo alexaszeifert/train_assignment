@@ -24,6 +24,13 @@ int kocsik_szama;
 vector<Kocsi> szerelveny;
 list<pair<string,int>> menetrend;
 };
+
+struct Kiskutya{
+string type;
+string name;
+list<string>tricks;
+};
+
 int main()
 {
     cout << "Hello world!" << endl;

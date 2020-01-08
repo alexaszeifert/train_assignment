@@ -83,5 +83,12 @@ int main()
     vector<Kocsi> osszes_termek = beolvas_kocsi("kocsi1.txt");
     vector<Termek> osszes_kocsi = beolvas_termek("termek1.txt");
 
+    int ido = 0;
+
+    while (true) {
+
+        ido++;
+    }
+
     return 0;
 }

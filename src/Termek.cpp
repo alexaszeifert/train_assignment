@@ -5,7 +5,7 @@ string Termek::getTermekNeve () const {
 }
 
 string Termek::getForrasHely () const {
-    return forrashely;
+    return allomas;
 }
 
 string Termek::getCelhely () const {

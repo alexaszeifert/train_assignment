@@ -3,6 +3,7 @@
 
 #include <string>
 #include <set>
+#include "Kocsi.hpp"
 
 using namespace std;
 
@@ -15,10 +16,16 @@ public:
     int getKocsikSzama () const;
     set<pair<string,int>> getMenetrend () const;
 
+    void felcsatol (Kocsi* kocsi);
+    void lecsatol (Kocsi* kocsi);
+    void frissit (int ido);
+
 private:
     string vonat_neve;
     int kocsik_szama;
+    string allomas;
     set<pair<string,int>> menetrend;
+    set<Kocsi*> kocsik;
 };
 
 #endif // VONAT_H

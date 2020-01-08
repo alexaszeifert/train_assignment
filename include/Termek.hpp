@@ -8,7 +8,7 @@ using namespace std;
 class Termek
 {
 public:
-    Termek(string termek_neve, string forrashely, string celhely, int kezdeti_darabszam):termek_neve(termek_neve),forrashely(forrashely),celhely(celhely),kezdeti_darabszam(kezdeti_darabszam){};
+    Termek(string termek_neve, string allomas, string celhely, int kezdeti_darabszam):termek_neve(termek_neve),allomas(allomas),celhely(celhely),kezdeti_darabszam(kezdeti_darabszam){};
 
     string getTermekNeve () const;
     string getForrasHely () const;
@@ -17,7 +17,7 @@ public:
 
 private:
     string termek_neve;
-    string forrashely;
+    string allomas;
     string celhely;
     int kezdeti_darabszam;
 };

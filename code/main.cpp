@@ -5,7 +5,7 @@
 
 using namespace std;
 
-struct Termek{
+struct Termekk{
 string forrashely;
 string celhely;
 int kezdeti_darabszam;

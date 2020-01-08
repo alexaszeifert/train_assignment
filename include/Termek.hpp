@@ -8,20 +8,21 @@ using namespace std;
 class Termek
 {
 public:
-    Termek(string termek_neve, string allomas, string celhely, int kezdeti_darabszam):termek_neve(termek_neve),allomas(allomas),celhely(celhely),kezdeti_darabszam(kezdeti_darabszam){};
+    Termek(string termek_neve, string allomas, string celhely, int darabszam):termek_neve(termek_neve),allomas(allomas),celhely(celhely),darabszam(darabszam){};
 
     string getTermekNeve () const;
-    string getForrasHely () const;
+    string getAllomas () const;
     string getCelhely () const;
-    int getKezdetiDarabszam () const;
+    int getDarabszam () const;
 
     void frissit (string allomas);
+    Termek eloszt (int mennyit);
 
 private:
     string termek_neve;
     string allomas;
     string celhely;
-    int kezdeti_darabszam;
+    int darabszam;
 };
 
 #endif // TERMEK_H

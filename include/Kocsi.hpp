@@ -14,8 +14,8 @@ public:
 
     string getAzonosito () const;
     int getKapacitas () const;
-    string getInduloAallomas () const;
-    int getTelitettseg () const;
+    string getAllomas () const;
+    int getSzabadHely () const;
 
     void felpakol (Termek* termek);
     void lepakol (Termek* termek);
@@ -29,6 +29,7 @@ private:
     string allomas;
     int telitettseg;
     set<Termek*> termekek;
+    bool felcsatolva; ///todo
 };
 
 #endif // KOCSI_H

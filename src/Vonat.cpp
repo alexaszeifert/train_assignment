@@ -16,6 +16,8 @@ list<pair<string,int>> Vonat::getMenetrend () const {
 void Vonat::felcsatol (Kocsi* kocsi) {
     if (kocsik.size () < (unsigned)kocsik_szama)
         kocsik.insert (kocsi);
+    else
+        cout << "error\n";
 }
 
 void Vonat::lecsatol (Kocsi* kocsi) {
@@ -23,7 +25,7 @@ void Vonat::lecsatol (Kocsi* kocsi) {
 }
 
 void Vonat::frissit (int ido) {
-    int menet_ido = ido % menetrend.back ().second;
+    int menet_ido = ido == 0 ? 0 : ido %  menetrend.back().second == 0 ? 7 : ido %  menetrend.back().second;
     allomas = "";
     for (pair<string,int> a: menetrend) {
         if (a.second == menet_ido) {

@@ -1,4 +1,5 @@
 #include "Kocsi.hpp"
+#include <iostream>
 
 string Kocsi::getAzonosito () const {
     return azonosito;
@@ -8,12 +9,15 @@ int Kocsi::getKapacitas () const {
     return kapacitas;
 }
 
-string Kocsi::getInduloAallomas () const {
+string Kocsi::getAllomas () const {
     return allomas;
 }
 
-int Kocsi::getTelitettseg () const {
-    return telitettseg;
+int Kocsi::getSzabadHely () const {
+    int szabad = kapacitas;
+    for (Termek* termek: termekek)
+        szabad -= termek->getDarabszam();
+    return szabad;
 }
 
 bool Kocsi::operator== (const Kocsi& kocsi) {
@@ -21,8 +25,10 @@ bool Kocsi::operator== (const Kocsi& kocsi) {
 }
 
 void Kocsi::felpakol (Termek* termek) {
-    if (termekek.size () + termek->getKezdetiDarabszam() < (unsigned)kapacitas)
+    if (getSzabadHely() >= termek->getDarabszam())
         termekek.insert (termek);
+    else
+        cout << "error\n";
 }
 
 void Kocsi::lepakol (Termek* termek) {

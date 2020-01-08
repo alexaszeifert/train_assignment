@@ -23,10 +23,10 @@ void Vonat::lecsatol (Kocsi* kocsi) {
 }
 
 void Vonat::frissit (int ido) {
-    ido = ido % menetrend.back ().second;
+    int menet_ido = ido % menetrend.back ().second;
     allomas = "";
     for (pair<string,int> a: menetrend) {
-        if (a.second == ido) {
+        if (a.second == menet_ido) {
             allomas = a.first;
             break;
         }

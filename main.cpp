@@ -5,38 +5,17 @@
 #include <sstream>
 #include <set>
 
+#include "Termek.hpp"
+#include "Kocsi.hpp"
+#include "Vonat.hpp"
 
 using namespace std;
-
-struct Termek
-{
-    string termek_neve;
-    string forrashely;
-    string celhely;
-    int kezdeti_darabszam;
-};
-
-struct Kocsi
-{
-    string azonosito;
-    int kapacitas;
-    string indulo_allomas;
-    int telitettseg=0;
-};
-
-struct Vonat
-{
-    string vonat_neve;
-    int kocsik_szama;
-    set<pair<string,int>> menetrend;
-};
 
 vector<Vonat> beolvas_vonat(string fajlnev1)
 {
     Vonat v;
     vector<Vonat> segedv;
     string allomas_seged;
-    int eltelt_ido_seged=0;
     string seged;
     stringstream ss;
     ifstream in(fajlnev1);
@@ -48,18 +27,13 @@ vector<Vonat> beolvas_vonat(string fajlnev1)
         in>> hany_allomas;
         for(int i=0; i<hany_allomas; i++)
         {
-            in>>allomas_seged;
-            in>>eltelt_ido_seged;
             pair<string,int> p;
-            p.first=allomas_seged;
-            p.second=eltelt_ido_seged;
+            in>>p.first;
+            in>>p.second;
             v.menetrend.insert(p);
-            allomas_seged.clear();
-            eltelt_ido_seged=0;
         }
         segedv.push_back(v);
     }
-    ///itt nem lenne rossz feltölteni, de szintén nem tudjuk ellenőrizni, hogy nincse már benne az a vonat
     in.close();
     return segedv;
 }
@@ -74,7 +48,6 @@ vector<Kocsi> beolvas_kocsi(string fajlnev2)
         in2>>k.azonosito;
         in2>>k.kapacitas;
         in2>>k.indulo_allomas;
-        ///osszes_kocsi.push_back(k); itt ha abba töltjük fel először, akkor nincs megvizsgálva, hogy vane olyan nevű kocsi már
         segedk.push_back(k);
     }
     in2.close();
@@ -100,12 +73,9 @@ vector<Termek> beolvas_termek(string fajlnev3)
 
 int main()
 {
-    vector<Vonat> osszes_vonat;
-    vector<Termek> osszes_termek;
-    vector<Kocsi> osszes_kocsi;
-    osszes_vonat = beolvas_vonat("menetrend1.txt");
-    osszes_kocsi = beolvas_kocsi("kocsi1.txt");
-    osszes_termek = beolvas_termek("termek1.txt");
-    cout << "Hello world!" << endl;
+    vector<Vonat> osszes_vonat = beolvas_vonat("menetrend1.txt");
+    vector<Kocsi> osszes_termek = beolvas_kocsi("kocsi1.txt");
+    vector<Termek> osszes_kocsi = beolvas_termek("termek1.txt");
+
     return 0;
 }

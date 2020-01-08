@@ -1,0 +1,2 @@
+cucc1 A C 35
+cucc2 B C 15

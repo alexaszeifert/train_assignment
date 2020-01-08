@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1576682228 source:d:\tanulas\5.felev\prog2\projekt\main.cpp
+	<iostream>
+	<vector>
+	<list>
+	<fstream>
+

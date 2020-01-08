@@ -79,16 +79,14 @@ vector<Termek> beolvas_termek(string fajlnev3)
 
 int main()
 {
-    vector<Vonat> osszes_vonat = beolvas_vonat("menetrend1.txt");
-    vector<Kocsi> osszes_termek = beolvas_kocsi("kocsi1.txt");
-    vector<Termek> osszes_kocsi = beolvas_termek("termek1.txt");
+    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/menetrend1.txt");
+    vector<Kocsi> osszes_termek = beolvas_kocsi("input_files/kocsi1.txt");
+    vector<Termek> osszes_kocsi = beolvas_termek("input_files/termek1.txt");
 
     int ido = 0;
 
-    while (true) {
-        cout << osszes_vonat.size ();
+    while (ido < 100) {
         for (Vonat& vonat: osszes_vonat) {
-        //cout <<"itt";
             vonat.frissit (ido);
         }
 

@@ -23,7 +23,6 @@ void Vonat::lecsatol (Kocsi* kocsi) {
 }
 
 void Vonat::frissit (int ido) {
-    cout <<"itt";
     ido = ido % menetrend.back ().second;
     allomas = "";
     for (pair<string,int> a: menetrend) {
@@ -32,9 +31,9 @@ void Vonat::frissit (int ido) {
             break;
         }
     }
+    cout << ido << " " << vonat_neve << " " << allomas << "\n";
 
     for (Kocsi* kocsi: kocsik) {
         kocsi->frissit (allomas);
-        cout << ido << " " << allomas << "\n";
     }
 }

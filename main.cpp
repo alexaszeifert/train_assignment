@@ -134,13 +134,17 @@ int main()
                         kocsi.felpakol(&osszes_termek[osszes_termek.size () - 1]);
                         cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << "\n";
                     }
+                    ///meg kell nézni, hogy célba érte valamelyik termék, kocsikon lévõ termékeken végig menni és ha valamelyik célba ért akkor lepakolni, amit itt is meg lehet írni
+
                 }
             }
         }
-
+        ///ezek bepakolja a termékeket abba a kocsikba, amelyek nincsenek felcsatolva
+    ///getFelcsatolva fel true, lecsatolva false meg kell írni
         for (vonatok)
             for (kocsi)
                 if (allomas = allomas)
+            ///ez a kocsi felcsatolása, kb ugyanaz mint az elõzõ, azaz a fenti
 
         ido++;
     }

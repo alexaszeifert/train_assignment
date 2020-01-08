@@ -13,26 +13,27 @@ using namespace std;
 
 vector<Vonat> beolvas_vonat(string fajlnev1)
 {
-    Vonat v;
     vector<Vonat> segedv;
+    string vonat_neve;
+    int kocsik_szama;
+    set<pair<string,int>> menetrend;
     string allomas_seged;
     string seged;
-    stringstream ss;
     ifstream in(fajlnev1);
     int hany_allomas;
     while(in.good())
     {
-        in>> v.vonat_neve;
-        in>> v.kocsik_szama;
+        in>> vonat_neve;
+        in>> kocsik_szama;
         in>> hany_allomas;
         for(int i=0; i<hany_allomas; i++)
         {
             pair<string,int> p;
             in>>p.first;
             in>>p.second;
-            v.menetrend.insert(p);
+            menetrend.insert(p);
         }
-        segedv.push_back(v);
+        segedv.push_back(Vonat (vonat_neve, kocsik_szama, menetrend));
     }
     in.close();
     return segedv;
@@ -41,14 +42,16 @@ vector<Vonat> beolvas_vonat(string fajlnev1)
 vector<Kocsi> beolvas_kocsi(string fajlnev2)
 {
     vector<Kocsi> segedk;
+    string azonosito;
+    int kapacitas;
+    string indulo_allomas;
     ifstream in2(fajlnev2);
     while(in2.good())
     {
-        Kocsi k;
-        in2>>k.azonosito;
-        in2>>k.kapacitas;
-        in2>>k.indulo_allomas;
-        segedk.push_back(k);
+        in2>>azonosito;
+        in2>>kapacitas;
+        in2>>indulo_allomas;
+        segedk.push_back(Kocsi (azonosito, kapacitas, indulo_allomas));
     }
     in2.close();
     return segedk;
@@ -57,15 +60,18 @@ vector<Kocsi> beolvas_kocsi(string fajlnev2)
 vector<Termek> beolvas_termek(string fajlnev3)
 {
     ifstream in3(fajlnev3);
+    string termek_neve;
+    string forrashely;
+    string celhely;
+    int kezdeti_darabszam;
     vector<Termek> segedt;
     while(in3.good())
     {
-        Termek t;
-        in3>>t.termek_neve;
-        in3>>t.forrashely;
-        in3>>t.celhely;
-        in3>>t.kezdeti_darabszam;
-        segedt.push_back(t);
+        in3>>termek_neve;
+        in3>>forrashely;
+        in3>>celhely;
+        in3>>kezdeti_darabszam;
+        segedt.push_back(Termek (termek_neve, forrashely, celhely, kezdeti_darabszam));
     }
     in3.close();
     return segedt;

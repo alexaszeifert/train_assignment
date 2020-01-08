@@ -8,70 +8,92 @@
 
 using namespace std;
 
-struct Termek{
-string termek_neve;
-string forrashely;
-string celhely;
-int kezdeti_darabszam;
+struct Termek
+{
+    string termek_neve;
+    string forrashely;
+    string celhely;
+    int kezdeti_darabszam;
 };
 
-struct Kocsi{
-string azonosito;
-int kapacitas;
-string indulo_allomas;
-int telitettseg=0;
+struct Kocsi
+{
+    string azonosito;
+    int kapacitas;
+    string indulo_allomas;
+    int telitettseg=0;
 };
 
-struct Vonat{
-string vonat_neve;
-int kocsik_szama;
-set<pair<string,int>> menetrend;
+struct Vonat
+{
+    string vonat_neve;
+    int kocsik_szama;
+    set<pair<string,int>> menetrend;
 };
 
-void beolvas(string fajlnev1,string fajlnev2, string fajlnev3){
-Vonat v;
-string allomas_seged;
-int eltelt_ido_seged=0;
+vector<Vonat> beolvas_vonat(string fajlnev1)
+{
+    Vonat v;
+    vector<Vonat> segedv;
+    string allomas_seged;
+    int eltelt_ido_seged=0;
+    string seged;
+    stringstream ss;
+    ifstream in(fajlnev1);
+    int hany_allomas;
+    while(in.good())
+    {
+        in>> v.vonat_neve;
+        in>> v.kocsik_szama;
+        in>> hany_allomas;
+        for(int i=0; i<hany_allomas; i++)
+        {
+            in>>allomas_seged;
+            in>>eltelt_ido_seged;
+            pair<string,int> p;
+            p.first=allomas_seged;
+            p.second=eltelt_ido_seged;
+            v.menetrend.insert(p);
+            allomas_seged.clear();
+            eltelt_ido_seged=0;
+        }
+    segedv.push_back(v);
+    }
+     ///itt nem lenne rossz feltÃ¶lteni, de szintÃ©n nem tudjuk ellenÅ‘rizni, hogy nincse mÃ¡r benne az a vonat
+    in.close();
+    return segedv;
+}
+
+vector<Kocsi> beolvas_kocsi(string fajlnev2)
+{
+    string seged;
+    stringstream ss;
+    vector<Kocsi> segedk;
+    ifstream in2(fajlnev2);
+    while(in2.good())
+    {
+        Kocsi k;
+        getline(in2,k.azonosito,' ');
+        getline(in2,seged,' ');
+        ss<<seged;
+        ss>>k.kapacitas;
+        getline(in2,k.indulo_allomas);
+        ///osszes_kocsi.push_back(k); itt ha abba tÃ¶ltjÃ¼k fel elÅ‘szÃ¶r, akkor nincs megvizsgÃ¡lva, hogy vane olyan nevÅ± kocsi mÃ¡r
+        ss.clear();
+        segedk.push_back(k);
+    }
+    in2.close();
+    return segedk;
+}
+
+vector<Termek> beolvas_termek(string fajlnev3)
+{
+ifstream in3(fajlnev3);
 string seged;
 stringstream ss;
-ifstream in(fajlnev1);
-getline(in, v.vonat_neve, ' ');
-getline(in, seged);
-ss<<seged;
-ss>>v.kocsik_szama;
-ss.clear();
-while(in.good()){
-getline(in,allomas_seged, ' ');
-getline(in,seged);
-ss<<seged;
-ss>>eltelt_ido_seged;
-ss.clear();
-pair<string,int> p;
-p.first=allomas_seged;
-p.second=eltelt_ido_seged;
-v.menetrend.insert(p);
-allomas_seged.clear();
-eltelt_ido_seged=0;
-}
-//osszes_vonat.push_back(v); itt nem lenne rossz feltölteni, de szintén nem tudjuk ellenõrizni, hogy nincse már benne az a vonat
-in.close();
-
-
-ifstream in2(fajlnev2);
-while(in2.good()){
-    Kocsi k;
-    getline(in2,k.azonosito,' ');
-    getline(in2,seged,' ');
-    ss<<seged;
-    ss>>k.kapacitas;
-    getline(in2,k.indulo_allomas);
-    ///osszes_kocsi.push_back(k); itt ha abba töltjük fel elõször, akkor nincs megvizsgálva, hogy vane olyan nevû kocsi már
-    ss.clear();
-}
-in2.close();
-
-ifstream in3(fajlnev3);
-while(in3.good()){
+vector<Termek> segedt;
+while(in3.good())
+{
     Termek t;
     getline(in3,t.termek_neve,' ');
     getline(in3,t.forrashely,' ');
@@ -80,8 +102,10 @@ while(in3.good()){
     ss<<seged;
     ss>>t.kezdeti_darabszam;
     ss.clear();
+    segedt.push_back(t);
 }
 in3.close();
+return segedt;
 }
 
 int main()
@@ -89,7 +113,9 @@ int main()
     vector<Vonat> osszes_vonat;
     vector<Termek> osszes_termek;
     vector<Kocsi> osszes_kocsi;
-    beolvas("menetrend1.txt", "kocsi1.txt", "termek1.txt");
+    osszes_vonat = beolvas_vonat("menetrend1.txt");
+    osszes_kocsi = beolvas_kocsi("kocsi1.txt");
+    osszes_termek = beolvas_termek("termek1.txt");
     cout << "Hello world!" << endl;
     return 0;
 }

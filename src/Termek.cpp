@@ -16,3 +16,6 @@ int Termek::getKezdetiDarabszam () const {
     return kezdeti_darabszam;
 }
 
+void Termek::frissit (string allomas) {
+    this->allomas = allomas;
+}

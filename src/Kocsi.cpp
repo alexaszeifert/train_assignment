@@ -25,6 +25,13 @@ void Kocsi::felpakol (Termek* termek) {
         termekek.insert (termek);
 }
 
-void Kocsi::lepakol (Termek* termek){
+void Kocsi::lepakol (Termek* termek) {
     termekek.erase (termek);
+}
+
+void Kocsi::frissit (string allomas) {
+    this->allomas = allomas;
+    for (Termek* termek: termekek) {
+        termek->frissit (allomas);
+    }
 }

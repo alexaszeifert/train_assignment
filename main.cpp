@@ -16,7 +16,7 @@ vector<Vonat> beolvas_vonat(string fajlnev1)
     vector<Vonat> segedv;
     string vonat_neve;
     int kocsik_szama;
-    set<pair<string,int>> menetrend;
+    list<pair<string,int>> menetrend;
     string allomas_seged;
     string seged;
     ifstream in(fajlnev1);
@@ -31,7 +31,7 @@ vector<Vonat> beolvas_vonat(string fajlnev1)
             pair<string,int> p;
             in>>p.first;
             in>>p.second;
-            menetrend.insert(p);
+            menetrend.push_back(p);
         }
         segedv.push_back(Vonat (vonat_neve, kocsik_szama, menetrend));
     }
@@ -86,6 +86,11 @@ int main()
     int ido = 0;
 
     while (true) {
+        cout << osszes_vonat.size ();
+        for (Vonat& vonat: osszes_vonat) {
+        //cout <<"itt";
+            vonat.frissit (ido);
+        }
 
         ido++;
     }

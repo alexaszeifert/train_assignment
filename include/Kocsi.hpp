@@ -19,6 +19,7 @@ public:
 
     void felpakol (Termek* termek);
     void lepakol (Termek* termek);
+    void frissit (string allomas);
 
     bool operator== (const Kocsi& kocsi);
 

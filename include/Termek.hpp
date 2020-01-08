@@ -15,6 +15,8 @@ public:
     string getCelhely () const;
     int getKezdetiDarabszam () const;
 
+    void frissit (string allomas);
+
 private:
     string termek_neve;
     string allomas;

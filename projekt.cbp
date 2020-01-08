@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +34,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Kocsi.hpp" />
+		<Unit filename="include/Termek.hpp" />
+		<Unit filename="include/Vonat.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Kocsi.cpp" />
+		<Unit filename="src/Termek.cpp" />
+		<Unit filename="src/Vonat.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

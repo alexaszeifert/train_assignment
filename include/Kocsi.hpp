@@ -8,13 +8,13 @@ using namespace std;
 class Kocsi
 {
 public:
-    Kocsi();
+    Kocsi(string azonosito,int kapacitas,string indulo_allomas,int telitettseg):azonosito(azonosito),kapacitas(kapacitas),indulo_allomas(indulo_allomas),telitettseg(telitettseg){};
 
 private:
     string azonosito;
     int kapacitas;
     string indulo_allomas;
-    int telitettseg = 0;
+    int telitettseg;
 };
 
 #endif // KOCSI_H

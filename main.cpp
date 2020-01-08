@@ -57,29 +57,24 @@ vector<Vonat> beolvas_vonat(string fajlnev1)
             allomas_seged.clear();
             eltelt_ido_seged=0;
         }
-    segedv.push_back(v);
+        segedv.push_back(v);
     }
-     ///itt nem lenne rossz feltölteni, de szintén nem tudjuk ellenőrizni, hogy nincse már benne az a vonat
+    ///itt nem lenne rossz feltölteni, de szintén nem tudjuk ellenőrizni, hogy nincse már benne az a vonat
     in.close();
     return segedv;
 }
 
 vector<Kocsi> beolvas_kocsi(string fajlnev2)
 {
-    string seged;
-    stringstream ss;
     vector<Kocsi> segedk;
     ifstream in2(fajlnev2);
     while(in2.good())
     {
         Kocsi k;
-        getline(in2,k.azonosito,' ');
-        getline(in2,seged,' ');
-        ss<<seged;
-        ss>>k.kapacitas;
-        getline(in2,k.indulo_allomas);
+        in2>>k.azonosito;
+        in2>>k.kapacitas;
+        in2>>k.indulo_allomas;
         ///osszes_kocsi.push_back(k); itt ha abba töltjük fel először, akkor nincs megvizsgálva, hogy vane olyan nevű kocsi már
-        ss.clear();
         segedk.push_back(k);
     }
     in2.close();
@@ -88,24 +83,19 @@ vector<Kocsi> beolvas_kocsi(string fajlnev2)
 
 vector<Termek> beolvas_termek(string fajlnev3)
 {
-ifstream in3(fajlnev3);
-string seged;
-stringstream ss;
-vector<Termek> segedt;
-while(in3.good())
-{
-    Termek t;
-    getline(in3,t.termek_neve,' ');
-    getline(in3,t.forrashely,' ');
-    getline(in3,t.celhely,' ');
-    getline(in3,seged);
-    ss<<seged;
-    ss>>t.kezdeti_darabszam;
-    ss.clear();
-    segedt.push_back(t);
-}
-in3.close();
-return segedt;
+    ifstream in3(fajlnev3);
+    vector<Termek> segedt;
+    while(in3.good())
+    {
+        Termek t;
+        in3>>t.termek_neve;
+        in3>>t.forrashely;
+        in3>>t.celhely;
+        in3>>t.kezdeti_darabszam;
+        segedt.push_back(t);
+    }
+    in3.close();
+    return segedt;
 }
 
 int main()

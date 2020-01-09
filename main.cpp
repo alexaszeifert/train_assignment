@@ -138,7 +138,6 @@ int main()
                         pakolva.insert(kocsi.getAzonosito());
                         cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << " (elosztva)\n";
                     }
-                    ///meg kell nézni, hogy célba érte valamelyik termék, kocsikon lévõ termékeken végig menni és ha valamelyik célba ért akkor lepakolni, amit itt is meg lehet írni
                 }
             }
         }
@@ -156,8 +155,8 @@ int main()
             }
         }
 
-        ///ezek bepakolja a termékeket abba a kocsikba, amelyek nincsenek felcsatolva
-        ///getFelcsatolva fel true, lecsatolva false meg kell írni
+        ///ezek bepakolja a termï¿½keket abba a kocsikba, amelyek nincsenek felcsatolva
+        ///getFelcsatolva fel true, lecsatolva false meg kell ï¿½rni
         for (Vonat& vonat: osszes_vonat) {
             for (Kocsi& kocsi: osszes_kocsi) {
                 if (pakolva.count (kocsi.getAzonosito()) == 0 && kocsi.getFelcsatolva() == false && vonat.getAllomas() == kocsi.getAllomas()) {
@@ -196,7 +195,7 @@ int main()
                 }
             }
         }
-            ///ez a kocsi felcsatolása, kb ugyanaz mint az elõzõ, azaz a fenti
+            ///ez a kocsi felcsatolï¿½sa, kb ugyanaz mint az elï¿½zï¿½, azaz a fenti
 
         ido++;
         pakolva.clear();

@@ -13,15 +13,22 @@ list<pair<string,int>> Vonat::getMenetrend () const {
     return menetrend;
 }
 
+string Vonat::getAllomas () const {
+    return allomas;
+}
+
 void Vonat::felcsatol (Kocsi* kocsi) {
-    if (kocsik.size () < (unsigned)kocsik_szama)
+    if (kocsik.size () < (unsigned)kocsik_szama) {
         kocsik.insert (kocsi);
+        kocsi->setFelcsatolva (true);
+    }
     else
         cout << "error\n";
 }
 
 void Vonat::lecsatol (Kocsi* kocsi) {
     kocsik.erase (kocsi);
+    kocsi->setFelcsatolva(false);
 }
 
 void Vonat::frissit (int ido) {

@@ -16,6 +16,14 @@ int Termek::getDarabszam () const {
     return darabszam;
 }
 
+int Termek::getLeszallitva () const {
+    return leszallitva;
+}
+
+void Termek::setLeszallitva (bool szallitva) {
+    leszallitva = szallitva;
+}
+
 void Termek::frissit (string allomas) {
     this->allomas = allomas;
 }

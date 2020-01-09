@@ -16,6 +16,7 @@ public:
     string getVonatNeve () const;
     int getKocsikSzama () const;
     list<pair<string,int>> getMenetrend () const;
+    string getAllomas () const;
 
     void felcsatol (Kocsi* kocsi);
     void lecsatol (Kocsi* kocsi);

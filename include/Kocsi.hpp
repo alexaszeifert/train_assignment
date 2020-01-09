@@ -10,12 +10,15 @@ using namespace std;
 class Kocsi
 {
 public:
-    Kocsi(string azonosito, int kapacitas, string allomas):azonosito(azonosito),kapacitas(kapacitas),allomas(allomas),telitettseg(0){};
+    Kocsi(string azonosito, int kapacitas, string allomas):azonosito(azonosito),kapacitas(kapacitas),allomas(allomas),telitettseg(0), felcsatolva (false){};
 
     string getAzonosito () const;
     int getKapacitas () const;
     string getAllomas () const;
     int getSzabadHely () const;
+    bool getFelcsatolva () const;
+    void setFelcsatolva (bool csatolva);
+    set<Termek*> getTermekek () const;
 
     void felpakol (Termek* termek);
     void lepakol (Termek* termek);
@@ -29,7 +32,7 @@ private:
     string allomas;
     int telitettseg;
     set<Termek*> termekek;
-    bool felcsatolva; ///todo
+    bool felcsatolva;
 };
 
 #endif // KOCSI_H

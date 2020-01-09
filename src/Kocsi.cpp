@@ -20,6 +20,18 @@ int Kocsi::getSzabadHely () const {
     return szabad;
 }
 
+bool Kocsi::getFelcsatolva () const {
+    return felcsatolva;
+}
+
+void Kocsi::setFelcsatolva (bool csatolva) {
+    felcsatolva = csatolva;
+}
+
+set<Termek*> Kocsi::getTermekek () const {
+    return termekek;
+}
+
 bool Kocsi::operator== (const Kocsi& kocsi) {
     return azonosito == kocsi.azonosito && kapacitas == kocsi.kapacitas && allomas == kocsi.allomas && telitettseg == kocsi.telitettseg;
 }
@@ -32,6 +44,7 @@ void Kocsi::felpakol (Termek* termek) {
 }
 
 void Kocsi::lepakol (Termek* termek) {
+
     termekek.erase (termek);
 }
 

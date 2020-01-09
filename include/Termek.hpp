@@ -14,6 +14,8 @@ public:
     string getAllomas () const;
     string getCelhely () const;
     int getDarabszam () const;
+    int getLeszallitva () const;
+    void setLeszallitva (bool szallitva);
 
     void frissit (string allomas);
     Termek eloszt (int mennyit);
@@ -23,6 +25,7 @@ private:
     string allomas;
     string celhely;
     int darabszam;
+    bool leszallitva;
 };
 
 #endif // TERMEK_H

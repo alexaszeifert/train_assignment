@@ -117,32 +117,93 @@ int main()
 
     int ido = 0;
 
-    while (ido < 20) {
+    while (ido < 40) {
         for (Vonat& vonat: osszes_vonat) {
             vonat.frissit (ido);
         }
 
+        set<string> pakolva; // ezekbe pakoltunk, ezeket nem csatolhatjuk ebben a korben mar
+
         for (Kocsi& kocsi: osszes_kocsi) {
             for (Termek& termek: osszes_termek) {
-                if (kocsi.getAllomas() == termek.getAllomas() && kocsi.getFelcsatolva() == false) {
-                    if (kocsi.getSzabadHely() > termek.getDarabszam()) {
+                if (kocsi.getAllomas() == termek.getAllomas() && kocsi.getFelcsatolva() == false && termek.getLeszallitva() == false) {
+                    if (kocsi.getSzabadHely() >= termek.getDarabszam()) {
                         kocsi.felpakol(&termek);
+                        pakolva.insert(kocsi.getAzonosito());
                         cout << ido << " pakol " << kocsi.getAzonosito() << " " << termek.getTermekNeve() << " " << termek.getDarabszam() << "\n";
-                    } else if (kocsi.getSzabadHely() != 0) {
+                    } else if (kocsi.getSzabadHely() != 0 && kocsi.getFelcsatolva() == false && pakolva.count (kocsi.getAzonosito()) == 0) {
                         Termek uj = termek.eloszt(kocsi.getSzabadHely());
                         osszes_termek.push_back(uj);
                         kocsi.felpakol(&osszes_termek[osszes_termek.size () - 1]);
-                        cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << "\n";
+                        pakolva.insert(kocsi.getAzonosito());
+                        cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << " (elosztva)\n";
+                    }
+                    ///meg kell nézni, hogy célba érte valamelyik termék, kocsikon lévõ termékeken végig menni és ha valamelyik célba ért akkor lepakolni, amit itt is meg lehet írni
+                }
+            }
+        }
+
+        for (Kocsi& kocsi: osszes_kocsi) {
+            if (kocsi.getAllomas() != "") {
+                for (Termek* termek: kocsi.getTermekek()) {
+                    if (termek->getCelhely() == kocsi.getAllomas() && kocsi.getFelcsatolva() == false) {
+                        kocsi.lepakol(termek);
+                        termek->setLeszallitva(true);
+                        pakolva.insert(kocsi.getAzonosito());
+                        cout << ido << " kipakol " << kocsi.getAzonosito() << " " << termek->getTermekNeve() << " " << termek->getDarabszam() << "\n";
                     }
                 }
             }
         }
 
-        for (vonatok)
-            for (kocsi)
-                if (allomas = allomas)
+        ///ezek bepakolja a termékeket abba a kocsikba, amelyek nincsenek felcsatolva
+        ///getFelcsatolva fel true, lecsatolva false meg kell írni
+        for (Vonat& vonat: osszes_vonat) {
+            for (Kocsi& kocsi: osszes_kocsi) {
+                if (pakolva.count (kocsi.getAzonosito()) == 0 && kocsi.getFelcsatolva() == false && vonat.getAllomas() == kocsi.getAllomas()) {
+                    vonat.felcsatol(&kocsi);
+                    cout << ido << " felcsatol " << kocsi.getAzonosito() << " " << vonat.getVonatNeve() << "\n";
+                }
+                if (pakolva.count (kocsi.getAzonosito()) == 0 && kocsi.getFelcsatolva() == true && vonat.getAllomas() == kocsi.getAllomas()) {
+                    for (Termek* termek: kocsi.getTermekek()) {
+                        if (termek->getCelhely() == kocsi.getAllomas()) {
+                            vonat.lecsatol(&kocsi);
+                            cout << ido << " lecsatol " << kocsi.getAzonosito() << " " << vonat.getVonatNeve() << "\n";
+                            break;
+                        }
+                    }
+                    if (kocsi.getFelcsatolva() == true && kocsi.getSzabadHely() > 0) {
+                        for (Termek& termek: osszes_termek) {
+                            if (termek.getAllomas() == kocsi.getAllomas() && termek.getLeszallitva() == false) {
+                                vonat.lecsatol(&kocsi);
+                                cout << ido << " lecsatol " << kocsi.getAzonosito() << " " << vonat.getVonatNeve() << "\n";
+                                /* megnezni jo-e
+                                if (kocsi.getSzabadHely() >= termek.getDarabszam()) {
+                                    kocsi.felpakol(&termek);
+                                    pakolva.insert(kocsi.getAzonosito());
+                                    cout << ido << " pakol " << kocsi.getAzonosito() << " " << termek.getTermekNeve() << " " << termek.getDarabszam() << "\n";
+                                } else if (kocsi.getSzabadHely() != 0 && kocsi.getFelcsatolva() == false && pakolva.count (kocsi.getAzonosito()) == 0) {
+                                    Termek uj = termek.eloszt(kocsi.getSzabadHely());
+                                    osszes_termek.push_back(uj);
+                                    kocsi.felpakol(&osszes_termek[osszes_termek.size () - 1]);
+                                    pakolva.insert(kocsi.getAzonosito());
+                                    cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << " (elosztva)\n";
+                                }*/
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+            ///ez a kocsi felcsatolása, kb ugyanaz mint az elõzõ, azaz a fenti
 
         ido++;
+        pakolva.clear();
+    }
+
+    for (Termek& termek: osszes_termek) {
+        cout << termek.getTermekNeve() << " leszallitva: " << termek.getLeszallitva() << endl;
     }
 
     return 0;

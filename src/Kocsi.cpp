@@ -48,6 +48,10 @@ void Kocsi::lepakol (Termek* termek) {
     termekek.erase (termek);
 }
 
+//frissitjuk az akt. allomast
+//a kocsin levo termekek poziciojat frissiti
+//allomast leptetjuk, az aktualist mutatja
+
 void Kocsi::frissit (string allomas) {
     this->allomas = allomas;
     for (Termek* termek: termekek) {

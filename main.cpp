@@ -117,12 +117,16 @@ int main()
 
     int ido = 0;
 
-    while (ido < 40) {
+    ///ciklus az ido szimulalasara
+
+    while (ido < 40) { ///frissitjuk a vonatok aktualis poziciojat az ido elteltevel
         for (Vonat& vonat: osszes_vonat) {
             vonat.frissit (ido);
         }
 
         set<string> pakolva; // ezekbe pakoltunk, ezeket nem csatolhatjuk ebben a korben mar
+
+///osszehasonlitja az arukat, megnezi, hogy ugyanazon az allomason vannak e a kocsiparok, hogy nincsenek e felcsatolva, ha nincs, akkor megprobal ra felpakolni
 
         for (Kocsi& kocsi: osszes_kocsi) {
             for (Termek& termek: osszes_termek) {
@@ -142,7 +146,7 @@ int main()
             }
         }
 
-        for (Kocsi& kocsi: osszes_kocsi) {
+        for (Kocsi& kocsi: osszes_kocsi) { //vegigmegy az osszes kocsin, ha epp allomason van akkor vegigmegy az osszes termeken, ami allomason van
             if (kocsi.getAllomas() != "") {
                 for (Termek* termek: kocsi.getTermekek()) {
                     if (termek->getCelhely() == kocsi.getAllomas() && kocsi.getFelcsatolva() == false) {

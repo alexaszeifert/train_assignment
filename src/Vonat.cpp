@@ -31,6 +31,12 @@ void Vonat::lecsatol (Kocsi* kocsi) {
     kocsi->setFelcsatolva(false);
 }
 
+//megnezi/beallitja, hogy adott idopontban hol van a vonatunk
+//az ido elteleset szimulalja
+//ciklikussagot szimulal, megnezi, hogy a ciklusban hanyadik elemnel tart, utana vegigmegy a menetrenden és hogy abban az oraban valamelyik megalloban van e a vonat
+//frissitest meghivja a rakotott kocsikra is
+//mivel az allomast mar tudjuk, igy ott mar nem kell kiszamolni az idot, csak frissiti a kocsik aktualis allomasat is
+
 void Vonat::frissit (int ido) {
     int menet_ido = ido == 0 ? 0 : ido %  menetrend.back().second == 0 ? 7 : ido %  menetrend.back().second;
     allomas = "";

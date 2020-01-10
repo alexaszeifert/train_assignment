@@ -159,8 +159,7 @@ int main()
             }
         }
 
-        ///ezek bepakolja a term�keket abba a kocsikba, amelyek nincsenek felcsatolva
-        ///getFelcsatolva fel true, lecsatolva false meg kell �rni
+        ///ez bepakolja a termekeket abba a kocsikba, amelyek nincsenek felcsatolva
         for (Vonat& vonat: osszes_vonat) {
             for (Kocsi& kocsi: osszes_kocsi) {
                 if (pakolva.count (kocsi.getAzonosito()) == 0 && kocsi.getFelcsatolva() == false && vonat.getAllomas() == kocsi.getAllomas()) {
@@ -180,7 +179,7 @@ int main()
                             if (termek.getAllomas() == kocsi.getAllomas() && termek.getLeszallitva() == false) {
                                 vonat.lecsatol(&kocsi);
                                 cout << ido << " lecsatol " << kocsi.getAzonosito() << " " << vonat.getVonatNeve() << "\n";
-                                /* megnezni jo-e
+                                // megnezni jo-e
                                 if (kocsi.getSzabadHely() >= termek.getDarabszam()) {
                                     kocsi.felpakol(&termek);
                                     pakolva.insert(kocsi.getAzonosito());
@@ -191,7 +190,7 @@ int main()
                                     kocsi.felpakol(&osszes_termek[osszes_termek.size () - 1]);
                                     pakolva.insert(kocsi.getAzonosito());
                                     cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << " (elosztva)\n";
-                                }*/
+                                }
                                 break;
                             }
                         }
@@ -199,7 +198,7 @@ int main()
                 }
             }
         }
-            ///ez a kocsi felcsatol�sa, kb ugyanaz mint az el�z�, azaz a fenti
+            ///ez a kocsi felcsatolasa, kb ugyanaz mint az elozo, azaz a fenti
 
         ido++;
         pakolva.clear();

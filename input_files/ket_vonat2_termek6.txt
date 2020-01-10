@@ -1,0 +1,2 @@
+cucc1 A B 1
+cucc2 C D 1

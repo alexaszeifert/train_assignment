@@ -107,18 +107,66 @@ void kiir_adatok(vector<Vonat> a, vector<Termek> c,  vector<Kocsi> b)
     }
 }
 
+bool lehetetlen_kocsi(vector<Vonat> a, vector<Kocsi> b){
+    bool eredmeny;
+
+for(int i=0; i<b.size();i++){
+    for(int j=0; j<a.size();j++){
+        list<pair<string, int>> menetrend = a[j].getMenetrend();
+        for(auto it = menetrend.begin(); it!=menetrend.end(); it++){
+             if(b[i].getAllomas() == it->first) {eredmeny=true; break;}
+             else eredmeny=false;
+        }
+        if(eredmeny==true) break;
+    }
+}
+return eredmeny;
+}
+
+bool lehetetlen_termek(vector<Vonat> a, vector<Termek> c){
+    bool eredmeny_allomas;
+    bool eredmeny_celhely;
+    bool eredmeny;
+
+for(int i=0; i<c.size();i++){
+    for(int j=0; j<a.size();j++){
+        list<pair<string, int>> menetrend = a[j].getMenetrend();
+        for(auto it = menetrend.begin(); it!=menetrend.end(); it++){
+             if(c[i].getAllomas() == it->first) {eredmeny_allomas=true;break;}
+             else eredmeny_allomas=false;
+        }
+         for(auto it = menetrend.begin(); it!=menetrend.end(); it++){
+             if(c[i].getCelhely() == it->first) {eredmeny_celhely=true;break;}
+             else eredmeny_celhely=false;
+        }
+        if(eredmeny_allomas==true && eredmeny_celhely==true) {eredmeny=true; break;}
+        else eredmeny=false;
+    }
+}
+return eredmeny;
+}
+
 int main()
 {
-    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/menetrend1.txt");
+    /*vector<Vonat> osszes_vonat = beolvas_vonat("input_files/menetrend1.txt");
     vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/kocsi1.txt");
-    vector<Termek> osszes_termek = beolvas_termek("input_files/termek1.txt");
+    vector<Termek> osszes_termek = beolvas_termek("input_files/termek1.txt");*/
+    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/ket_vonat_menetrend5.txt");
+    vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/ket_vonat_kocsi5.txt");
+    vector<Termek> osszes_termek = beolvas_termek("input_files/ket_vonat_termek5.txt");
 
     kiir_adatok(osszes_vonat,osszes_termek,osszes_kocsi);
 
     int ido = 0;
 
     ///ciklus az ido szimulalasara
+    bool lefussone_kocsi;
+    bool lefussone_termek;
 
+    lefussone_kocsi = lehetetlen_kocsi(osszes_vonat, osszes_kocsi);
+    lefussone_termek = lehetetlen_termek(osszes_vonat, osszes_termek);
+
+    if(lefussone_kocsi==true && lefussone_termek==true){
     while (ido < 40) { ///frissitjuk a vonatok aktualis poziciojat az ido elteltevel
         for (Vonat& vonat: osszes_vonat) {
             vonat.frissit (ido);
@@ -140,7 +188,7 @@ int main()
                         osszes_termek.push_back(uj);
                         kocsi.felpakol(&osszes_termek[osszes_termek.size () - 1]);
                         pakolva.insert(kocsi.getAzonosito());
-                        cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << " (elosztva)\n";
+                        cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << "\n";
                     }
                 }
             }
@@ -189,7 +237,7 @@ int main()
                                     osszes_termek.push_back(uj);
                                     kocsi.felpakol(&osszes_termek[osszes_termek.size () - 1]);
                                     pakolva.insert(kocsi.getAzonosito());
-                                    cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << " (elosztva)\n";
+                                    cout << ido << " pakol " << kocsi.getAzonosito() << " " << uj.getTermekNeve() << " " << uj.getDarabszam() << "\n";
                                 }
                                 break;
                             }
@@ -202,11 +250,25 @@ int main()
 
         ido++;
         pakolva.clear();
-    }
 
+    int szamlalo = 0;
     for (Termek& termek: osszes_termek) {
-        cout << termek.getTermekNeve() << " leszallitva: " << termek.getLeszallitva() << endl;
+        if(termek.getLeszallitva()==true)
+        {
+            szamlalo++;
+        }
     }
+    if(szamlalo==osszes_termek.size())
+    {
+        break;
+    }
+    }
+    }
+    else cout<<"LEHETETLEN!!!"<<endl;
+
+    /*for (Termek& termek: osszes_termek) {
+        cout << termek.getTermekNeve() << " leszallitva: " << termek.getLeszallitva() << endl;
+    }*/
 
     return 0;
 }

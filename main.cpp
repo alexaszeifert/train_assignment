@@ -107,7 +107,7 @@ void kiir_adatok(vector<Vonat> a, vector<Termek> c,  vector<Kocsi> b)
     }
 }
 
-bool lehetetlen_kocsi(vector<Vonat> a, vector<Kocsi> b){
+bool lehetetlen_kocsi(vector<Vonat> a, vector<Kocsi> b, string& seged){
     bool eredmeny;
 
 for(int i=0; i<b.size();i++){
@@ -115,7 +115,7 @@ for(int i=0; i<b.size();i++){
         list<pair<string, int>> menetrend = a[j].getMenetrend();
         for(auto it = menetrend.begin(); it!=menetrend.end(); it++){
              if(b[i].getAllomas() == it->first) {eredmeny=true; break;}
-             else eredmeny=false;
+             else {eredmeny=false; seged = b[i].getAzonosito();}
         }
         if(eredmeny==true) break;
     }
@@ -123,7 +123,7 @@ for(int i=0; i<b.size();i++){
 return eredmeny;
 }
 
-bool lehetetlen_termek(vector<Vonat> a, vector<Termek> c){
+bool lehetetlen_termek(vector<Vonat> a, vector<Termek> c,string& seged){
     bool eredmeny_allomas;
     bool eredmeny_celhely;
     bool eredmeny;
@@ -140,7 +140,7 @@ for(int i=0; i<c.size();i++){
              else eredmeny_celhely=false;
         }
         if(eredmeny_allomas==true && eredmeny_celhely==true) {eredmeny=true; break;}
-        else eredmeny=false;
+        else {eredmeny=false; seged = c[i].getTermekNeve();}
     }
 }
 return eredmeny;
@@ -151,9 +151,9 @@ int main()
     /*vector<Vonat> osszes_vonat = beolvas_vonat("input_files/menetrend1.txt");
     vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/kocsi1.txt");
     vector<Termek> osszes_termek = beolvas_termek("input_files/termek1.txt");*/
-    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/ket_vonat_menetrend5.txt");
-    vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/ket_vonat_kocsi5.txt");
-    vector<Termek> osszes_termek = beolvas_termek("input_files/ket_vonat_termek5.txt");
+    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/lehetetlen2_menetrend8.txt");
+    vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/lehetetlen2_kocsi8.txt");
+    vector<Termek> osszes_termek = beolvas_termek("input_files/lehetetlen2_termek8.txt");
 
     kiir_adatok(osszes_vonat,osszes_termek,osszes_kocsi);
 
@@ -163,8 +163,11 @@ int main()
     bool lefussone_kocsi;
     bool lefussone_termek;
 
-    lefussone_kocsi = lehetetlen_kocsi(osszes_vonat, osszes_kocsi);
-    lefussone_termek = lehetetlen_termek(osszes_vonat, osszes_termek);
+    string hiba_kocsi = " ";
+    string hiba_termek = " ";
+
+    lefussone_kocsi = lehetetlen_kocsi(osszes_vonat, osszes_kocsi, hiba_kocsi);
+    lefussone_termek = lehetetlen_termek(osszes_vonat, osszes_termek, hiba_termek);
 
     if(lefussone_kocsi==true && lefussone_termek==true){
     while (ido < 40) { ///frissitjuk a vonatok aktualis poziciojat az ido elteltevel
@@ -264,7 +267,10 @@ int main()
     }
     }
     }
-    else cout<<"LEHETETLEN!!!"<<endl;
+      else if(lefussone_kocsi==false && lefussone_termek==false){cout<<"LEHETETLEN, a "<<hiba_kocsi<<" és a "<<hiba_termek<<" miatt!!"<<endl;}
+    else if(lefussone_kocsi==false) {cout<<"LEHETETLEN, a "<< hiba_kocsi<<" kocsi miatt!!!"<<endl;}
+    else if(lefussone_termek==false) {cout<<"LEHETETLEN, a "<<hiba_termek<<" termek miatt!!!"<<endl;}
+
 
     /*for (Termek& termek: osszes_termek) {
         cout << termek.getTermekNeve() << " leszallitva: " << termek.getLeszallitva() << endl;

@@ -31,14 +31,14 @@ void Vonat::lecsatol (Kocsi* kocsi) {
     kocsi->setFelcsatolva(false);
 }
 
-//megnezi/beallitja, hogy adott idopontban hol van a vonatunk
-//az ido elteleset szimulalja
-//ciklikussagot szimulal, megnezi, hogy a ciklusban hanyadik elemnel tart, utana vegigmegy a menetrenden és hogy abban az oraban valamelyik megalloban van e a vonat
-//frissitest meghivja a rakotott kocsikra is
-//mivel az allomast mar tudjuk, igy ott mar nem kell kiszamolni az idot, csak frissiti a kocsik aktualis allomasat is
+///megnezi/beallitja, hogy adott idopontban hol van a vonatunk
+///az ido elteleset szimulalja
+///ciklikussagot szimulal, megnezi, hogy a ciklusban hanyadik elemnel tart, utana vegigmegy a menetrenden és hogy abban az oraban valamelyik megalloban van e a vonat
+///frissitest meghivja a rakotott kocsikra is
+///mivel az allomast mar tudjuk, igy ott mar nem kell kiszamolni az idot, csak frissiti a kocsik aktualis allomasat is
 
 void Vonat::frissit (int ido) {
-    int menet_ido = ido == 0 ? 0 : ido %  menetrend.back().second == 0 ? 7 : ido %  menetrend.back().second;
+    int menet_ido = ido == 0 ? 0 : ido %  menetrend.back().second == 0 ? menetrend.back().second : ido %  menetrend.back().second;
     allomas = "";
     for (pair<string,int> a: menetrend) {
         if (a.second == menet_ido) {
@@ -46,7 +46,7 @@ void Vonat::frissit (int ido) {
             break;
         }
     }
-    cout << ido << " " << vonat_neve << " " << allomas << "\n";
+    ///cout << ido << " " << vonat_neve << " " << allomas << "\n";
 
     for (Kocsi* kocsi: kocsik) {
         kocsi->frissit (allomas);

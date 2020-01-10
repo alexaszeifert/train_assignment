@@ -148,12 +148,15 @@ return eredmeny;
 
 int main()
 {
-    /*vector<Vonat> osszes_vonat = beolvas_vonat("input_files/menetrend1.txt");
+   /* vector<Vonat> osszes_vonat = beolvas_vonat("input_files/menetrend1.txt");
     vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/kocsi1.txt");
     vector<Termek> osszes_termek = beolvas_termek("input_files/termek1.txt");*/
-    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/lehetetlen2_menetrend8.txt");
+   /* vector<Vonat> osszes_vonat = beolvas_vonat("input_files/lehetetlen2_menetrend8.txt");
     vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/lehetetlen2_kocsi8.txt");
-    vector<Termek> osszes_termek = beolvas_termek("input_files/lehetetlen2_termek8.txt");
+    vector<Termek> osszes_termek = beolvas_termek("input_files/lehetetlen2_termek8.txt");*/
+    vector<Vonat> osszes_vonat = beolvas_vonat("input_files/basic_menetrend2.txt");
+    vector<Kocsi> osszes_kocsi = beolvas_kocsi("input_files/basic_kocsi2.txt");
+    vector<Termek> osszes_termek = beolvas_termek("input_files/basic_termek2.txt");
 
     kiir_adatok(osszes_vonat,osszes_termek,osszes_kocsi);
 
@@ -210,7 +213,7 @@ int main()
             }
         }
 
-        ///ez bepakolja a termekeket abba a kocsikba, amelyek nincsenek felcsatolva
+        ///ez felcsatola a kocsikat, amelyek fel vannak pakolva
         for (Vonat& vonat: osszes_vonat) {
             for (Kocsi& kocsi: osszes_kocsi) {
                 if (pakolva.count (kocsi.getAzonosito()) == 0 && kocsi.getFelcsatolva() == false && vonat.getAllomas() == kocsi.getAllomas()) {
@@ -249,7 +252,7 @@ int main()
                 }
             }
         }
-            ///ez a kocsi felcsatolasa, kb ugyanaz mint az elozo, azaz a fenti
+
 
         ido++;
         pakolva.clear();
